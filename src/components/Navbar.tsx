@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import MobileLogo from '../../public/logo.svg'
+import MobileLogo from '../assets/logo.svg'
 import RocketIcon from '../assets/rocket.svg';
 
 const Navbar = () => {
