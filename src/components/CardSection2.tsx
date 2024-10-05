@@ -32,6 +32,8 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 const CardSection2 = () => {
 	const targetRef = useRef(null);
 	const [activeTab, setActiveTab] = useState(0);
+	const [showTooltipIndex, setShowTooltipIndex] = useState<number | null>(null);
+	const [copiedCode, setCopiedCode] = useState('');
 	const controls = useAnimation();
 
 	const { scrollYProgress } = useScroll({
@@ -43,6 +45,16 @@ const CardSection2 = () => {
 	React.useEffect(() => {
 		controls.start({ x: `${-activeTab * 30}%` });
 	}, [activeTab, controls]);
+
+	const copyToClipboard = (text: string, index: number) => {
+		navigator.clipboard.writeText(text).then(() => {
+			setShowTooltipIndex(index);
+			setCopiedCode(text);
+			setTimeout(() => setShowTooltipIndex(null), 2000);
+		}).catch(() => {
+			setShowTooltipIndex(null);
+		});
+	};
 
 	const cardData = [
 		{
@@ -116,36 +128,49 @@ const CardSection2 = () => {
 												</div>
 												<div className='flex-1 bg-[#17181A] p-4 space-y-4 rounded-2xl text-[#D2D2D2] text-base font-normal border border-[#FFFFFF1A]'>
 													<div className='bg-[#111213] p-4 border border-[#FFFFFF1A] rounded-2xl'>
-														<p className='flex items-start justify-between'>
+														<p className='relative flex items-start justify-between'>
 															<span className='w-[200px]'>
 																{card.code1}
 															</span>
 															<img
 																src={CopyIcon}
 																alt=''
+																title='Copy to Clipboard'
+																onClick={() => copyToClipboard(card.code1, index)}
 																className='cursor-pointer'
 															/>
+															{showTooltipIndex === index && copiedCode === card.code1 && (
+																<div className="absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2">
+																	Copied!
+																</div>
+															)}
 														</p>
 													</div>
 													<p>or</p>
 													<div className='bg-[#111213] p-4 border border-[#FFFFFF1A] rounded-2xl'>
-														<p className='flex items-start justify-between'>
+														<p className='relative flex items-start justify-between'>
 															<span className='w-[200px]'>
 																{card.code2}
 															</span>
 															<img
 																src={CopyIcon}
 																alt=''
+																title='Copy to Clipboard'
+																onClick={() => copyToClipboard(card.code2, index)}
 																className='cursor-pointer'
 															/>
+															{showTooltipIndex === index && copiedCode === card.code2 && (
+																<div className="absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2">
+																	Copied!
+																</div>
+															)}
 														</p>
 													</div>
 												</div>
 												<button
 													className='w-full border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl block lg:hidden'
 													style={{
-														background:
-															'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
+														background: 'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
 													}}
 												>
 													{card.buttonText}
