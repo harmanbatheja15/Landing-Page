@@ -106,7 +106,7 @@ const CardSection1 = () => {
 										<div className='h-full'>
 											<div className='flex items-center lg:flex-row flex-col lg:p-16 p-4 lg:h-full gap-4'>
 												<div className='flex-1 space-y-4 z-[1]'>
-													<div className='h-[54px]'>
+													<div className='lg:h-auto h-[54px]'>
 														<h1 className='text-white font-bold lg:text-[28px] text-base lg:mb-2'>
 															{card.title}
 														</h1>
