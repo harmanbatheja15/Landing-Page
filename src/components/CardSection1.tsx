@@ -33,7 +33,7 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 };
 
 const CardSection1 = () => {
-	const targetRef = useRef(null);
+	const targetRef = useRef<HTMLDivElement>(null);
 	const [activeTab, setActiveTab] = useState(0);
 	const controls = useAnimation();
 
@@ -44,8 +44,45 @@ const CardSection1 = () => {
 	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-70%']);
 
 	useEffect(() => {
-		controls.start({ x: `${-activeTab * 25}%` });
-	}, [activeTab, controls]);
+        return () => {
+            localStorage.setItem('scrollPosition', window.scrollY.toString());
+        };
+    }, []);
+
+	useEffect(() => {
+        const savedPosition = localStorage.getItem('scrollPosition');
+        if (savedPosition) {
+            window.scrollTo({ top: parseInt(savedPosition), behavior: 'auto' });
+        }
+    }, []);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (targetRef.current) {
+				const { top, height } = targetRef.current.getBoundingClientRect();
+				const scrollPosition = -top + 200;
+				const cardHeight = height / 4;
+				const newActiveTab = Math.min(
+					Math.floor(scrollPosition / cardHeight),
+					3
+				);
+				setActiveTab(newActiveTab);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	const handleTabClick = (index: number) => {
+		setActiveTab(index);
+		if (targetRef.current) {
+			const { top } = targetRef.current.getBoundingClientRect();
+			const cardHeight = window.innerHeight;
+			const scrollTo = window.scrollY + top + index * cardHeight;
+			window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+		}
+	};
 
 	const cardData = [
 		{
@@ -85,7 +122,7 @@ const CardSection1 = () => {
 					<div className='flex flex-col justify-center sticky top-0 h-screen my-auto overflow-hidden'>
 						<CardTabs
 							activeTab={activeTab}
-							setActiveTab={setActiveTab}
+							setActiveTab={handleTabClick}
 						/>
 						<div className='flex items-center overflow-hidden'>
 							<motion.div
