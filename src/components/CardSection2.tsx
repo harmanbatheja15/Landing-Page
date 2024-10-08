@@ -35,6 +35,7 @@ const CardSection2 = () => {
 	const [showTooltipIndex, setShowTooltipIndex] = useState<number | null>(null);
 	const [copiedCode, setCopiedCode] = useState('');
 	const controls = useAnimation();
+	
 
 	const { scrollYProgress } = useScroll({
 		target: targetRef,
@@ -43,11 +44,24 @@ const CardSection2 = () => {
 	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-60%']);
 
 	useEffect(() => {
-		if (targetRef.current) {
-			const { top } = targetRef.current.getBoundingClientRect();
-			window.scrollTo({ top: window.scrollY + top, behavior: 'auto' });
-		}
-	}, []);
+        return () => {
+            localStorage.setItem('scrollPosition', window.scrollY.toString());
+        };
+    }, []);
+
+	// useEffect(() => {
+	// 	if (targetRef.current) {
+	// 		const { top } = targetRef.current.getBoundingClientRect();
+	// 		window.scrollTo({ top: window.scrollY + top, behavior: 'auto' });
+	// 	}
+	// }, []);
+
+	useEffect(() => {
+        const savedPosition = localStorage.getItem('scrollPosition');
+        if (savedPosition) {
+            window.scrollTo({ top: parseInt(savedPosition), behavior: 'auto' });
+        }
+    }, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
