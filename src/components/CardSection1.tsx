@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useTransform, useScroll, useAnimation } from 'framer-motion';
 import CardImage1 from '../assets/cardImage1.png';
 import CardImage2 from '../assets/cardImage2.png';
@@ -12,9 +12,6 @@ import LinkIcon from '../assets/linkIcon.svg';
 const CardTabs = ({ activeTab, setActiveTab }: any) => {
 	return (
 		<div className='pl-0 lg:pl-[120px]'>
-			{/* <h1 className='text-[#FFFFFF] font-bold text-[28px] mb-6'>
-				For the Devs
-			</h1> */}
 			<div className='flex items-center gap-4 mb-6 overflow-auto'>
 				{['Trade', 'Swap', 'OPerps', 'Perps'].map((tab, index) => (
 					<div
@@ -46,7 +43,7 @@ const CardSection1 = () => {
 
 	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-70%']);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		controls.start({ x: `${-activeTab * 25}%` });
 	}, [activeTab, controls]);
 
@@ -86,7 +83,10 @@ const CardSection1 = () => {
 			<div className='h-full'>
 				<section ref={targetRef} className='relative h-[400vh]'>
 					<div className='flex flex-col justify-center sticky top-0 h-screen my-auto overflow-hidden'>
-						<CardTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+						<CardTabs
+							activeTab={activeTab}
+							setActiveTab={setActiveTab}
+						/>
 						<div className='flex items-center overflow-hidden'>
 							<motion.div
 								animate={controls}
@@ -123,7 +123,7 @@ const CardSection1 = () => {
 														{card.buttonText}
 													</button>
 												</div>
-												<div className="flex-1 z-[1] h-full w-full">
+												<div className='flex-1 z-[1] h-full w-full'>
 													<div className='lg:w-[330px] lg:h-[270px] w-[250px] h-[240px]'>
 														<img
 															src={card.image}
@@ -141,8 +141,12 @@ const CardSection1 = () => {
 													{card.buttonText}
 												</button>
 											</div>
-											<div className="absolute bottom-0 h-full">
-												<img src={card.bgGraphic} alt="" className='bg-cover h-full' />
+											<div className='absolute bottom-0 h-full'>
+												<img
+													src={card.bgGraphic}
+													alt=''
+													className='bg-cover h-full'
+												/>
 											</div>
 										</div>
 									</div>
@@ -152,8 +156,6 @@ const CardSection1 = () => {
 					</div>
 				</section>
 			</div>
-
-			{/* </div> */}
 		</>
 	);
 };

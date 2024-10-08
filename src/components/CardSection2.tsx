@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useTransform, useScroll, useAnimation } from 'framer-motion';
 import LinkIcon from '../assets/linkIcon.svg';
 import CopyIcon from '../assets/copyIcon.svg';
@@ -30,7 +30,7 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 };
 
 const CardSection2 = () => {
-	const targetRef = useRef(null);
+	const targetRef = useRef<HTMLDivElement>(null);
 	const [activeTab, setActiveTab] = useState(0);
 	const [showTooltipIndex, setShowTooltipIndex] = useState<number | null>(null);
 	const [copiedCode, setCopiedCode] = useState('');
@@ -42,18 +42,52 @@ const CardSection2 = () => {
 
 	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-60%']);
 
-	React.useEffect(() => {
-		controls.start({ x: `${-activeTab * 30}%` });
-	}, [activeTab, controls]);
+	useEffect(() => {
+		if (targetRef.current) {
+			const { top } = targetRef.current.getBoundingClientRect();
+			window.scrollTo({ top: window.scrollY + top, behavior: 'auto' });
+		}
+	}, []);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (targetRef.current) {
+				const { top, height } = targetRef.current.getBoundingClientRect();
+				const scrollPosition = -top + 200;
+				const cardHeight = height / 3;
+				const newActiveTab = Math.min(
+					Math.floor(scrollPosition / cardHeight),
+					2
+				);
+				setActiveTab(newActiveTab);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	const handleTabClick = (index: number) => {
+		setActiveTab(index);
+		if (targetRef.current) {
+			const { top } = targetRef.current.getBoundingClientRect();
+			const cardHeight = window.innerHeight;
+			const scrollTo = window.scrollY + top + index * cardHeight;
+			window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+		}
+	};
 
 	const copyToClipboard = (text: string, index: number) => {
-		navigator.clipboard.writeText(text).then(() => {
-			setShowTooltipIndex(index);
-			setCopiedCode(text);
-			setTimeout(() => setShowTooltipIndex(null), 2000);
-		}).catch(() => {
-			setShowTooltipIndex(null);
-		});
+		navigator.clipboard
+			.writeText(text)
+			.then(() => {
+				setShowTooltipIndex(index);
+				setCopiedCode(text);
+				setTimeout(() => setShowTooltipIndex(null), 2000);
+			})
+			.catch(() => {
+				setShowTooltipIndex(null);
+			});
 	};
 
 	const cardData = [
@@ -87,9 +121,9 @@ const CardSection2 = () => {
 					<div className='flex flex-col justify-center sticky top-0 h-screen my-auto overflow-hidden'>
 						<CardTabs
 							activeTab={activeTab}
-							setActiveTab={setActiveTab}
+							setActiveTab={handleTabClick}
 						/>
-						<div className='flex items-center overflow-hidden'>
+						<div className='flex items-start justify-start overflow-hidden'>
 							<motion.div
 								animate={controls}
 								className='flex gap-4 pl-0 lg:pl-[120px]'
@@ -136,14 +170,22 @@ const CardSection2 = () => {
 																src={CopyIcon}
 																alt=''
 																title='Copy to Clipboard'
-																onClick={() => copyToClipboard(card.code1, index)}
+																onClick={() =>
+																	copyToClipboard(
+																		card.code1,
+																		index
+																	)
+																}
 																className='cursor-pointer'
 															/>
-															{showTooltipIndex === index && copiedCode === card.code1 && (
-																<div className="absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2">
-																	Copied!
-																</div>
-															)}
+															{showTooltipIndex ===
+																index &&
+																copiedCode ===
+																	card.code1 && (
+																	<div className='absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2'>
+																		Copied!
+																	</div>
+																)}
 														</p>
 													</div>
 													<p>or</p>
@@ -156,14 +198,22 @@ const CardSection2 = () => {
 																src={CopyIcon}
 																alt=''
 																title='Copy to Clipboard'
-																onClick={() => copyToClipboard(card.code2, index)}
+																onClick={() =>
+																	copyToClipboard(
+																		card.code2,
+																		index
+																	)
+																}
 																className='cursor-pointer'
 															/>
-															{showTooltipIndex === index && copiedCode === card.code2 && (
-																<div className="absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2">
-																	Copied!
-																</div>
-															)}
+															{showTooltipIndex ===
+																index &&
+																copiedCode ===
+																	card.code2 && (
+																	<div className='absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2'>
+																		Copied!
+																	</div>
+																)}
 														</p>
 													</div>
 												</div>
