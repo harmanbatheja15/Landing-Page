@@ -10,12 +10,41 @@ import CardGraphic3 from '../assets/cardGraphic3.png';
 import LinkIcon from '../assets/linkIcon.svg';
 
 const CardTabs = ({ activeTab, setActiveTab }: any) => {
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
+	const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+	useEffect(() => {
+		if (scrollContainerRef.current && tabRefs.current[activeTab]) {
+			const container = scrollContainerRef.current;
+			const activeTabElement = tabRefs.current[activeTab];
+
+			const containerWidth = container.clientWidth;
+			const tabWidth = activeTabElement.clientWidth;
+			const tabLeft = activeTabElement.offsetLeft;
+
+			let scrollLeft = tabLeft - containerWidth / 2 + tabWidth / 2;
+
+			scrollLeft = Math.max(0, Math.min(scrollLeft, container.scrollWidth - containerWidth));
+
+			container.scrollTo({
+				left: scrollLeft,
+				behavior: 'smooth',
+			});
+		}
+	}, [activeTab]);
+
+	const tabs = ['Trade', 'Swap', 'OPerps', 'Perps'];
+
 	return (
 		<div className='pl-0 lg:pl-[120px]'>
-			<div className='flex items-center gap-4 mb-6 overflow-auto'>
-				{['Trade', 'Swap', 'OPerps', 'Perps'].map((tab, index) => (
+			<div
+				ref={scrollContainerRef}
+				className='flex items-center gap-4 mb-6 overflow-auto'
+			>
+				{tabs.map((tab, index) => (
 					<div
 						key={tab}
+						ref={(el) => (tabRefs.current[index] = el)}
 						className={`flex flex-shrink-0 items-center justify-between w-[200px] py-4 px-6 rounded-2xl text-[#FFFFFF] font-extrabold text-lg border border-[#FFFFFF1A] cursor-pointer ${
 							activeTab === index
 								? 'bg-[#111213]'
@@ -44,17 +73,17 @@ const CardSection1 = () => {
 	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-70%']);
 
 	useEffect(() => {
-        return () => {
-            localStorage.setItem('scrollPosition', window.scrollY.toString());
-        };
+		return () => {
+			localStorage.setItem('scrollPosition1', window.scrollY.toString());
+		};
     }, []);
 
 	useEffect(() => {
-        const savedPosition = localStorage.getItem('scrollPosition');
-        if (savedPosition) {
-            window.scrollTo({ top: parseInt(savedPosition), behavior: 'auto' });
-        }
-    }, []);
+		const savedPosition = localStorage.getItem('scrollPosition1');
+		if (savedPosition) {
+			window.scrollTo({ top: parseInt(savedPosition), behavior: 'auto' });
+		}
+	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
