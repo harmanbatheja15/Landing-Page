@@ -15,7 +15,7 @@ const Ecosystem = () => {
 	return (
 		<>
 			<div className=''>
-				<h2 className='text-white font-semibold text-[26px] text-center'>
+				<h2 className='text-[#FFFFFF] opacity-50 font-normal text-sm text-center'>
 					Ecosystem
 				</h2>
 				<div className='xl:w-[1200px] flex lg:flex-col flex-row items-center justify-center mx-auto mt-8'>

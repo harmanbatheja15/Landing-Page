@@ -8,8 +8,8 @@ const Hero = () => {
 					<h1
 						className='text-[48px] xl:text-[84px] font-bold text-[#67FFD1] mx-auto mt-auto mb-32 text-transparent bg-clip-text xl:leading-[100px] leading-[57px]'
 						style={{
-							backgroundImage:
-								'linear-gradient(93.41deg, #67FFD1 -12.19%, #4F9DFF 110.84%)',
+							backgroundImage: 'linear-gradient(93.41deg, #67FFD1 -12.19%, #4F9DFF 110.84%)',
+							fontFamily: 'Urbanist',
 						}}
 					>
 						Web3

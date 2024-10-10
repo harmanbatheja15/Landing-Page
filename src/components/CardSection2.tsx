@@ -31,6 +31,11 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 
 	return (
 		<div className='pl-0 lg:pl-[120px]'>
+			<h1 className='text-[#FFFFFF] font-bold text-[28px] mb-6' style={{
+				fontFamily: 'Urbanist',
+			}}>
+				For the Devs
+			</h1>
 			<div
 				ref={scrollContainerRef}
 				className='flex items-center gap-4 mb-6 overflow-auto'
@@ -148,7 +153,7 @@ const CardSection2 = () => {
 
 	return (
 		<>
-			<div className='my-32 h-full'>
+			<div className='mb-32 h-full'>
 				<section ref={targetRef} className='relative h-[300vh]'>
 					<div className='flex flex-col justify-center sticky top-0 h-screen my-auto overflow-hidden'>
 						<CardTabs
@@ -175,7 +180,12 @@ const CardSection2 = () => {
 											<div className='flex items-center lg:flex-row flex-col lg:p-16 p-4 lg:h-full gap-4'>
 												<div className='flex-1 space-y-4 z-[1]'>
 													<div>
-														<h1 className='text-white font-bold lg:text-[28px] text-base lg:mb-2'>
+														<h1
+															className='text-white font-bold lg:text-[28px] text-base lg:mb-2'
+															style={{
+																fontFamily: 'Urbanist',
+															}
+														}>
 															{card.title}
 														</h1>
 														<p className='text-[#A5A5A6] font-normal lg:text-xs text-[10px]'>
@@ -185,8 +195,7 @@ const CardSection2 = () => {
 													<button
 														className='border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl lg:block hidden'
 														style={{
-															background:
-																'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
+															background: 'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
 														}}
 													>
 														{card.buttonText}

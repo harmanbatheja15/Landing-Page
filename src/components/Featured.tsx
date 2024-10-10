@@ -9,7 +9,7 @@ const Featured = () => {
 	return (
 		<>
 			<div className='pb-36'>
-				<h2 className='text-[#FFFFFF] font-normal text-sm text-center'>
+				<h2 className='text-[#FFFFFF] opacity-50 font-normal text-sm text-center'>
 					As featured in
 				</h2>
 				<div className='mx-auto mt-8'>

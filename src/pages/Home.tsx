@@ -8,7 +8,12 @@ import Featured from '../components/Featured';
 const Home = () => {
 	return (
 		<>
-			<main className='bg-black px-4'>
+			<main
+				className='bg-black px-4'
+				style={{
+					fontFamily: 'Manrope',
+				}}
+			>
 				{/* Hero section */}
 				<Hero />
 

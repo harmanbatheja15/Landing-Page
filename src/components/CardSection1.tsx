@@ -24,7 +24,10 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 
 			let scrollLeft = tabLeft - containerWidth / 2 + tabWidth / 2;
 
-			scrollLeft = Math.max(0, Math.min(scrollLeft, container.scrollWidth - containerWidth));
+			scrollLeft = Math.max(
+				0,
+				Math.min(scrollLeft, container.scrollWidth - containerWidth)
+			);
 
 			container.scrollTo({
 				left: scrollLeft,
@@ -76,7 +79,7 @@ const CardSection1 = () => {
 		return () => {
 			localStorage.setItem('scrollPosition1', window.scrollY.toString());
 		};
-    }, []);
+	}, []);
 
 	useEffect(() => {
 		const savedPosition = localStorage.getItem('scrollPosition1');
@@ -164,16 +167,24 @@ const CardSection1 = () => {
 										key={index}
 										className='relative lg:w-[800px] w-[280px] max-h-[430px] flex-shrink-0 overflow-hidden border border-[#F5F7FA0F] rounded-2xl'
 										style={{
-											background: 'linear-gradient(135deg, rgba(245, 247, 250, 0.06) 0%, rgba(245, 247, 250, 0.0001) 100%)',
-											backdropFilter: 'blur(108.73126983642578px)',
-											boxShadow: '0px 4px 4px 0px #090D141F',
+											background:
+												'linear-gradient(135deg, rgba(245, 247, 250, 0.06) 0%, rgba(245, 247, 250, 0.0001) 100%)',
+											backdropFilter:
+												'blur(108.73126983642578px)',
+											boxShadow:
+												'0px 4px 4px 0px #090D141F',
 										}}
 									>
 										<div className='h-full'>
 											<div className='flex items-center lg:flex-row flex-col lg:p-16 p-4 lg:h-full gap-4'>
 												<div className='flex-1 space-y-4 z-[1]'>
 													<div className='lg:h-auto h-[54px]'>
-														<h1 className='text-white font-bold lg:text-[28px] text-base lg:mb-2'>
+														<h1
+															className='text-white font-bold lg:text-[28px] text-base lg:mb-2'
+															style={{
+																fontFamily: 'Urbanist',
+															}}
+														>
 															{card.title}
 														</h1>
 														<p className='text-[#A5A5A6] font-normal lg:text-xs text-[10px]'>
