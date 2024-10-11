@@ -24,10 +24,7 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 
 			let scrollLeft = tabLeft - containerWidth / 2 + tabWidth / 2;
 
-			scrollLeft = Math.max(
-				0,
-				Math.min(scrollLeft, container.scrollWidth - containerWidth)
-			);
+			scrollLeft = Math.max(0, Math.min(scrollLeft, container.scrollWidth - containerWidth));
 
 			container.scrollTo({
 				left: scrollLeft,
@@ -49,9 +46,7 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 						key={tab}
 						ref={(el) => (tabRefs.current[index] = el)}
 						className={`flex flex-shrink-0 items-center justify-between w-[200px] py-4 px-6 rounded-2xl text-[#FFFFFF] font-extrabold text-lg border border-[#FFFFFF1A] cursor-pointer ${
-							activeTab === index
-								? 'bg-[#111213]'
-								: 'bg-transparent'
+							activeTab === index ? 'bg-[#111213]' : 'bg-transparent'
 						}`}
 						onClick={() => setActiveTab(index)}
 					>
