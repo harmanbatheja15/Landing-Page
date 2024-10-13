@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useTransform, useScroll, useAnimation } from 'framer-motion';
 import CardImage1 from '../assets/cardImage1.png';
 import CardImage2 from '../assets/cardImage2.png';
@@ -116,6 +117,8 @@ const CardSection1 = () => {
 			title: 'Kana Trade',
 			description: 'Trade Crypto Easy & Fast in Fully On-Chain Orderbook Platform Powered By Aptos',
 			buttonText: 'Try Kana Trade',
+			buttonLink: 'https://tradebook.kanalabs.io/?market=APT-USDC',
+			target: '',
 			image: CardImage1,
 			bgGraphic: CardGraphic1,
 		},
@@ -123,6 +126,8 @@ const CardSection1 = () => {
 			title: 'Swap',
 			description: 'Swaps tokens across 9+ EVM & Non-EVM Chains',
 			buttonText: 'Try Swap',
+			buttonLink: 'https://app.kanalabs.io/swap',
+			target: '',
 			image: CardImage2,
 			bgGraphic: CardGraphic2,
 		},
@@ -130,6 +135,8 @@ const CardSection1 = () => {
 			title: 'OPerps',
 			description: 'Perpetual Options Derivative Token for Trading & Hedging',
 			buttonText: 'Try OPerps',
+			buttonLink: 'https://operps.kanalabs.io/',
+			target: '',
 			image: CardImage3,
 			bgGraphic: CardGraphic1,
 		},
@@ -137,6 +144,7 @@ const CardSection1 = () => {
 			title: 'Perps',
 			description: 'Perpetual futures, limitless opportunities',
 			buttonText: 'Try Perps',
+			buttonLink: 'https://app.kanalabs.io/perps',
 			image: CardImage4,
 			bgGraphic: CardGraphic3,
 		},
@@ -186,14 +194,13 @@ const CardSection1 = () => {
 															{card.description}
 														</p>
 													</div>
-													<button
-														className='border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl lg:block hidden'
+													<Link to={card.buttonLink} target={card.target} className='w-fit border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl lg:block hidden'
 														style={{
 															background: 'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
 														}}
 													>
 														{card.buttonText}
-													</button>
+													</Link>
 												</div>
 												<div className='flex-1 z-[1] h-full w-full'>
 													<div className='lg:w-[330px] lg:h-[270px] w-[250px] h-[240px]'>
@@ -204,14 +211,13 @@ const CardSection1 = () => {
 														/>
 													</div>
 												</div>
-												<button
-													className='w-full border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl block lg:hidden z-[1]'
+												<Link to={card.buttonLink} target={card.target} className='w-full border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl block lg:hidden z-[1] text-center'
 													style={{
 														background: 'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
 													}}
 												>
 													{card.buttonText}
-												</button>
+												</Link>
 											</div>
 											<div className='absolute bottom-0 h-full'>
 												<img

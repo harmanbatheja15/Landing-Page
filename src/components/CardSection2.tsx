@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useTransform, useScroll, useAnimation } from 'framer-motion';
 import LinkIcon from '../assets/linkIcon.svg';
 import CopyIcon from '../assets/copyIcon.svg';
@@ -71,7 +72,7 @@ const CardSection2 = () => {
 		target: targetRef,
 	});
 
-	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-60%']);
+	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-70%']);
 
 	useEffect(() => {
         return () => {
@@ -132,6 +133,8 @@ const CardSection2 = () => {
 			title: 'Mirai Smart Wallet',
 			description: 'Navigate Like Web2 with EIP-4337 Crypto Wallet',
 			buttonText: 'Read SDK Docs',
+			buttonLink: '',
+			target: '',
 			code1: 'npm install @kanalabs/mirai-sdk',
 			code2: 'yarn add @kanalabs/mirai-sdk',
 		},
@@ -139,6 +142,8 @@ const CardSection2 = () => {
 			title: 'Aptos Gas Station',
 			description: 'AIP-39 Based Gas Station To Sponsor Gas on Web3 dApps',
 			buttonText: 'Read SDK Docs',
+			buttonLink: '',
+			target: '',
 			code1: 'npm install @kanalabs/paymaster-sdk',
 			code2: 'yarn add @kanalabs/paymaster-sdk',
 		},
@@ -146,6 +151,8 @@ const CardSection2 = () => {
 			title: 'Kana Widget',
 			description: '"Plug N Play" Plugin for Instant Cross-Chain Connectivity',
 			buttonText: 'Read Documentation',
+			buttonLink: '',
+			target: '',
 			code1: 'npm install @kanalabs/paymaster-sdk',
 			code2: 'yarn add @kanalabs/paymaster-sdk',
 		},
@@ -192,14 +199,14 @@ const CardSection2 = () => {
 															{card.description}
 														</p>
 													</div>
-													<button
-														className='border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl lg:block hidden'
+													<Link to={card.buttonLink} target={card.target}
+														className='w-fit border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl lg:block hidden'
 														style={{
 															background: 'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
 														}}
 													>
 														{card.buttonText}
-													</button>
+													</Link>
 												</div>
 												<div className='flex-1 bg-[#17181A] p-4 space-y-4 rounded-2xl text-[#D2D2D2] text-base font-normal border border-[#FFFFFF1A]'>
 													<div className='bg-[#111213] p-4 border border-[#FFFFFF1A] rounded-2xl'>
@@ -258,14 +265,14 @@ const CardSection2 = () => {
 														</p>
 													</div>
 												</div>
-												<button
-													className='w-full border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl block lg:hidden'
+												<Link to={card.buttonLink} target={card.target}
+													className='w-full border border-[#FFFFFF1A] font-extrabold text-sm py-4 px-6 rounded-2xl block lg:hidden text-center'
 													style={{
 														background: 'linear-gradient(99.48deg, #7DFFFD -15.26%, #59B9FF 117.67%)',
 													}}
 												>
 													{card.buttonText}
-												</button>
+												</Link>
 											</div>
 										</div>
 									</div>
