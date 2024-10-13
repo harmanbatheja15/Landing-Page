@@ -72,7 +72,7 @@ const CardSection2 = () => {
 		target: targetRef,
 	});
 
-	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-70%']);
+	const x = useTransform(scrollYProgress, [0, 1], ['1%', '-65%']);
 
 	useEffect(() => {
         return () => {
