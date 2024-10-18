@@ -31,7 +31,7 @@ const CardTabs = ({ activeTab, setActiveTab }: any) => {
 	const tabs = ['Mirai SDK', 'Paymaster', 'Kana Widget'];
 
 	return (
-		<div className='pl-0 lg:pl-[120px]'>
+		<div className='pl-4 lg:pl-[120px]'>
 			<h1 className='text-[#FFFFFF] font-bold text-[28px] mb-6' style={{
 				fontFamily: 'Urbanist',
 			}}>
@@ -160,7 +160,7 @@ const CardSection2 = () => {
 
 	return (
 		<>
-			<div className='mb-32 h-full'>
+			<div className='mb-32 h-full px-0 -mx-4'>
 				<section ref={targetRef} className='relative h-[300vh]'>
 					<div className='flex flex-col justify-center sticky top-0 h-screen my-auto overflow-hidden'>
 						<CardTabs
@@ -230,10 +230,10 @@ const CardSection2 = () => {
 																index &&
 																copiedCode ===
 																	card.code1 && (
-																	<div className='absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2'>
-																		Copied!
-																	</div>
-																)}
+																<div className='absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2'>
+																	Copied!
+																</div>
+															)}
 														</p>
 													</div>
 													<p>or</p>
@@ -258,10 +258,10 @@ const CardSection2 = () => {
 																index &&
 																copiedCode ===
 																	card.code2 && (
-																	<div className='absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2'>
-																		Copied!
-																	</div>
-																)}
+																<div className='absolute -top-10 -right-6 bg-gray-800 text-white text-sm rounded py-1 px-2'>
+																	Copied!
+																</div>
+															)}
 														</p>
 													</div>
 												</div>

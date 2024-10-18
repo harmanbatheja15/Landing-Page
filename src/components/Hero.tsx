@@ -37,8 +37,7 @@ const Hero = () => {
 					<h1
 						className='text-[48px] xl:text-[84px] font-bold text-[#67FFD1] mx-auto md:mt-auto md:mb-32 text-transparent bg-clip-text xl:leading-[100px] leading-[57px]'
 						style={{
-							backgroundImage:
-								'linear-gradient(93.41deg, #67FFD1 -12.19%, #4F9DFF 110.84%)',
+							backgroundImage: 'linear-gradient(93.41deg, #67FFD1 -12.19%, #4F9DFF 110.84%)',
 							fontFamily: 'Urbanist',
 						}}
 					>
@@ -51,7 +50,7 @@ const Hero = () => {
 						alt=''
 						className='w-[400px] xl:w-[780px]'
 					/> */}
-					<div className='relative md:w-[60%] lg:w-[50%] w-full h-screen max-w-screen overflow-hidden'>
+					<div className='relative md:w-[60%] lg:w-[50%] w-full h-[70vh] md:h-screen max-w-screen overflow-hidden'>
 						<canvas
 							ref={canvasRef}
 							id='canvas3d'
